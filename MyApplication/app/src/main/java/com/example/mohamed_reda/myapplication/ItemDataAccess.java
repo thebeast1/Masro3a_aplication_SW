@@ -6,7 +6,6 @@ import java.util.Calendar;
 
 public class ItemDataAccess {
 
-    //boshy
     public String getItems(String search) {
         String query = "";
         if (!search.isEmpty()) {

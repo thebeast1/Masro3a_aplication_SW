@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
-    //boshy
     ConnectionClass connectionClass = new ConnectionClass();
     private DrawerLayout dl;
     private ActionBarDrawerToggle abdt;
@@ -42,10 +41,14 @@ public class Home extends AppCompatActivity {
         search_button = (Button) findViewById(R.id.search_button);
         search_content = (EditText) findViewById(R.id.search_content);
 
+        ownershipService doLogin = new ownershipService();
+            doLogin.execute("");
 
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ownershipService doLogin = new ownershipService();
+                doLogin.execute("");
 
             }
         });
@@ -78,6 +81,8 @@ public class Home extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 if(id == R.id.home) {
                     search_content.setText("");
+                    ownershipService doLogin = new ownershipService();
+                    doLogin.execute("");
 
                 }else if(id == R.id.profile)
                 {
@@ -104,4 +109,74 @@ public class Home extends AppCompatActivity {
         return abdt.onOptionsItemSelected(item) ||super.onOptionsItemSelected(item);
     }
 
+    public class ownershipService extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+
+        String search =search_content.getText().toString();
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+            Toast.makeText(Home.this,r,Toast.LENGTH_SHORT).show();
+
+            if(isSuccess) {
+                post_list.setAdapter(new PostAdapter(Home.this,Items,Users));
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+                try {
+                    Connection con = connectionClass.CONNecting();
+
+                    if (con == null) {
+                        z = "Error in connection with SQL server";
+                    } else {
+                        ItemDataAccess item=new ItemDataAccess();
+                        String query = item.getItems(search);
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(query);
+                        System.out.println("----------------------------------------------------------------");
+                        Items.clear();
+                        Users.clear();
+
+                        while(rs.next())
+                        {
+                            Item item1 = new Item();
+                            item1.setName(rs.getString("Name"));
+                            item1.setDesc(rs.getString("Description"));
+                            item1.setID(rs.getInt("ItemID"));
+
+                            Person person = new Person();
+                            person.setId(rs.getInt("PersonID"));
+
+
+                            Users.add(person);
+                            Items.add(item1);
+
+                            isSuccess=true;
+                            System.out.println("----------------------------------------------------555----------------");
+                            System.out.println("The name of the Item: "+item1.getName()+" the id of the person is: "+person.getId()+ "the name: "+person.getName());
+
+                        }
+                        con.close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    isSuccess = false;
+                    z = "Exceptions";
+                }
+
+            return z;
+        }
+    }
 }

@@ -18,8 +18,6 @@ import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity {
 
-    //hegazy
-
     ConnectionClass connectionClass = new ConnectionClass();
     TextView create_Account;
     EditText email;
@@ -46,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RegesterService  doLogin = new RegesterService();
+                doLogin.execute("");
                 //Intent intent =new Intent(v.getContext(),Home.class);
                 //startActivity(intent);
             }
@@ -62,6 +62,87 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    public class RegesterService extends AsyncTask<String,String,String>
+    {
+        String z = "";
+        Boolean isSuccess = false;
+
+
+        String userid = email.getText().toString();
+        String password = pass.getText().toString();
+
+
+        @Override
+        protected void onPreExecute() {
+            pbbar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+            pbbar.setVisibility(View.GONE);
+            Toast.makeText(MainActivity.this,r,Toast.LENGTH_SHORT).show();
+
+            if(isSuccess) {
+                Toast.makeText(MainActivity.this,r,Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent(getApplicationContext(),Home.class);
+                startActivity(intent);
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            if(userid.trim().equals("")|| password.trim().equals(""))
+                z = "Please enter User Id and Password";
+            else
+            {
+                try {
+                    Connection con = connectionClass.CONNecting();
+
+                    if (con == null) {
+                        z = "Error in connection with SQL server";
+                    } else {
+                        PersonDataAccess p = new PersonDataAccess();
+                        String query = p.getPerson(userid,password);//"select * from Person where Email='" + userid + "' and Password='" + password + "'";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(query);
+                        System.out.println("----------------------------------------------------------------");
+                        if(rs.next())
+                        {
+                            person.setId(rs.getInt("PersonID"));
+                            person.setName(rs.getString("Name"));
+                            person.setEmail(rs.getString("Email"));
+                            person.setPassword(rs.getString("Password"));
+                            person.setNId(rs.getString("NID"));
+                            person.setPhoneNum(rs.getString("PhoneNum"));
+                            person.setRate(rs.getFloat("Rate"));
+
+                            P_ID = person.getId();
+
+                            z = "Login successfull";
+                            isSuccess=true;
+                            System.out.println("The name of the person: "+person.getName()+"the id is: "+person.getId()+" the rate: "+person.getRate());
+
+                        }
+                        else
+                        {
+                            z = "Invalid Credentials";
+                            isSuccess = false;
+                        }
+                        con.close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    isSuccess = false;
+                    z = "Exceptions";
+                }
+            }
+            return z;
+        }
+    }
 
 
 }
