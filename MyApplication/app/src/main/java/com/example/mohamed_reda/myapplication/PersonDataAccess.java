@@ -2,7 +2,7 @@ package com.example.mohamed_reda.myapplication;
 
 public class PersonDataAccess {
 
-    //samy
+
     public String getPerson(String userid,String password)
     {
         String query = "select * from Person where Email='" + userid + "' and Password='" + password + "'";
