@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp"></item>
+
+    <item android:id="@+id/addpost"
+        android:title="Add Post"
+        android:icon="@drawable/post"></item>
+
+    <item android:id="@+id/profile"
+        android:title="My profile"
+        android:icon="@drawable/ic_person_black_24dp"></item>
+
+    <item android:id="@+id/post"
+        android:title="My posts"
+        android:icon="@drawable/ic_assignment_black_24dp"></item>
+
+    <item android:id="@+id/about"
+        android:title="About us"
+        android:icon="@drawable/ic_info_outline_black_24dp"></item>
+
+    <item android:id="@+id/logout"
+        android:title="Log out"
+        android:icon="@drawable/ic_call_missed_outgoing_black_24dp"></item>
+
+    <item android:id="@+id/exit"
+        android:title="Exit"
+        android:icon="@drawable/ic_settings_power_black_24dp"></item>
+</menu>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signup"
+    android:background="@color/background"
+    android:orientation="vertical">
+    <TextView
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:text="REGISTRER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:id="@+id/Fn"
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Name"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:id="@+id/Ln"
+            android:paddingLeft="10dp"
+            android:hint="Last Name"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/Remail"
+        android:textColor="@color/white"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:drawableLeft="@drawable/email1"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:hint="@string/email"
+        android:layout_width="match_parent"
+        android:textColorHint="@color/white"
+        android:layout_height="wrap_content"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/Rpass"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:drawableLeft="@drawable/lock1"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:hint="@string/pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="" />
+    <EditText
+        android:layout_marginTop="40dp"
+        android:id="@+id/Nid"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:drawableLeft="@drawable/id"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:hint="National ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="" />
+    <EditText
+    android:id="@+id/Phone"
+    android:textColorHint="@color/white"
+    android:textColor="@color/white"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:drawableLeft="@drawable/phone"
+    android:inputType="textPassword"
+    android:textAlignment="center"
+    android:hint="Phone Number"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:autofillHints="" />
+
+    <Button
+        android:background="@color/colorAccent"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"
+        android:id="@+id/signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign up" />
+
+    <ProgressBar
+        android:layout_marginTop="20dp"
+        style="?android:attr/progressBarStyleLargeInverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbbar2"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
