@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 public class ConnectionClass {
 
-    //reda
     String ip,db,DBUserNameStr,DBPasswordStr;
 
     @SuppressLint("NewApi")

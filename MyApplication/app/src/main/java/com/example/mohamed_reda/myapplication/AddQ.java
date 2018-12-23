@@ -18,5 +18,22 @@ public class AddQ extends AppCompatActivity {
     }
 
 
+    protected void exitByBackKey() {
+
+        AlertDialog alertbox = new AlertDialog.Builder(this)
+                .setMessage("You maust Enter 5 Questions to verify the owner")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+
+                    // do something when the button is clicked
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                }).show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        exitByBackKey();
+    }
 
 }
